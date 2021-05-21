@@ -5,13 +5,13 @@
 | Column           | Type   | Options     |
 | ---------------- | ------ | ----------- |
 | nickname         | string | null: false |
-| email            | string | null: false |
-| password         | string | null: false |
+| email            | string | null: false, unique: true |
+| encrypted_password | string | null: false |
 | first_name_kanji | string | null: false |
 | last_name_kanji  | string | null: false |
 | first_name_kana  | string | null: false |
 | last_name_kana   | string | null: false |
-| birthday         | string | null: false |
+| birthday         | date   | null: false |
 
 ### Association
 
@@ -20,17 +20,17 @@
 
 ## items テーブル
 
-| Column           | Type       | Options     |
-| ---------------- | ---------- | ----------- |
-| name             | string     | null: false |
-| image            | string     | null: false |
-| description      | text       | null: false |
-| shipping_charge  | string     | null: false |
-| shipping_area    | string     | null: false |
-| shipping_date    | string     | null: false |
-| price            | integer    | null: false |
-| state            | string     | null: false |
-| user             | references | null: false |
+| Column             | Type       | Options     |
+| ------------------ | ---------- | ----------- |
+| name               | string     | null: false |
+| description        | text       | null: false |
+| shipping_charge_id | integer    | null: false |
+| prefecture_id      | integer    | null: false |
+| shipping_date_id   | integer    | null: false |
+| price              | integer    | null: false |
+| category_id        | integer    | null: false |
+| state_id           | integer    | null: false |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -41,8 +41,8 @@
 
 | Column           | Type       | Options     |
 | ---------------- | ---------- | ----------- |
-| user             | references | null: false |
-| item             | references | null: false |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 
 - belongs_to :user
 - belongs_to :item
@@ -53,10 +53,10 @@
 | Column           | Type       | Options     |
 | ---------------- | ---------- | ----------- |
 | postal_code      | string     | null: false |
-| prefecture       | string     | null: false |
+| prefecture_id    | integer    | null: false |
 | city             | string     | null: false |
 | address          | string     | null: false |
 | phone_number     | string     | null: false |
-| purchase         | references | null: false |
+| purchase         | references | null: false, foreign_key: true |
 
 - belongs_to :purchase
