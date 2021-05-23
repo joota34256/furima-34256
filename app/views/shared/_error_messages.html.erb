@@ -2,7 +2,11 @@
 <div class="error-alert">
   <ul>
     <% model.errors.full_messages.each do |message| %>
-    <li class='error-message'><%= message %></li>
+      <%# <% if message == "First name kanji can't be blank" || message == "Last name kanji can't be blank"%>
+        <%# <li class='error-message'>お名前（全角）は空欄にできません</Li>  %>
+      <%# <% else %> 
+        <li class='error-message'><%= message %></li>
+      <%# <% end%> 
     <% end %>
   </ul>
 </div>
