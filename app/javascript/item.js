@@ -1,6 +1,4 @@
-// window.addEventListener('load', () => {
-//   console.log("OK");
-// });
+
 feeRate = 0.1
 
 window.onload = function(){const priceInput = document.getElementById("item-price")
