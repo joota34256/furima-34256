@@ -67,13 +67,13 @@ RSpec.describe User, type: :model do
         @user.password = '１１ａａ１１'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
       it 'パスワードが半角数字のみだと登録できない' do
         @user.password = '111111'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it '名字（漢字）が空では登録できない' do
@@ -116,16 +116,16 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('First name kana is invalid')
       end
-      
+
       it '名字（漢字）が漢字・ひらがな・カタカナ以外では登録できない' do
         @user.last_name_kanji = 'test'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kanji is invalid")
+        expect(@user.errors.full_messages).to include('Last name kanji is invalid')
       end
       it '名前（漢字）が漢字・ひらがな・カタカナ以外では登録できない' do
         @user.first_name_kanji = 'test'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kanji is invalid")
+        expect(@user.errors.full_messages).to include('First name kanji is invalid')
       end
 
       it '誕生日が空では登録できない' do
