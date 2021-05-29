@@ -1,6 +1,6 @@
 class PurchaseBuyer
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture_id, :city, :address, :building_number, :phone_number, :user_id, :item_id
+  attr_accessor :postal_code, :prefecture_id, :city, :address, :building_number, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
     validates :postal_code, numericality: { only_integer: true } 
@@ -10,6 +10,7 @@ class PurchaseBuyer
     validates :phone_number, numericality: { only_integer: true } 
     validates :user_id
     validates :item_id
+    validates :token
   end
 
   def save
