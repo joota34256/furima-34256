@@ -16,43 +16,43 @@ RSpec.describe PurchaseBuyer, type: :model do
     end
     context '商品が購入できない時' do
       it '郵便番号が空だと購入できない' do
-        @purchase_buyer.postal_code = ""
+        @purchase_buyer.postal_code = ''
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include("Postal code can't be blank")
       end
       it '郵便番号にハイフンがないと購入できない' do
-        @purchase_buyer.postal_code = 1111111
+        @purchase_buyer.postal_code = 1_111_111
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include("Postal code is invalid")
+        expect(@purchase_buyer.errors.full_messages).to include('Postal code is invalid')
       end
 
       it '都道府県idが1だと購入できない' do
         @purchase_buyer.prefecture_id = 1
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@purchase_buyer.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it '市町村が空だと購入できない' do
-        @purchase_buyer.city = ""
+        @purchase_buyer.city = ''
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include("City can't be blank")
       end
 
       it '番地が空だと購入できない' do
-        @purchase_buyer.address = ""
+        @purchase_buyer.address = ''
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include("Address can't be blank")
       end
 
       it '電話番号が空だと購入できない' do
-        @purchase_buyer.phone_number = ""
+        @purchase_buyer.phone_number = ''
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include("Phone number can't be blank")
       end
       it '電話番号が11桁でないと購入できない' do
-        @purchase_buyer.phone_number = "0123456789"
+        @purchase_buyer.phone_number = '0123456789'
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include("Phone number is the wrong length (should be 11 characters)")
+        expect(@purchase_buyer.errors.full_messages).to include('Phone number is the wrong length (should be 11 characters)')
       end
       it 'userが紐づいていないと購入できない' do
         @purchase_buyer.user_id = nil
@@ -66,7 +66,7 @@ RSpec.describe PurchaseBuyer, type: :model do
       end
 
       it 'トークンがないと購入できない' do
-        @purchase_buyer.token = ""
+        @purchase_buyer.token = ''
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include("Token can't be blank")
       end
