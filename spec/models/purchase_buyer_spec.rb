@@ -25,7 +25,7 @@ RSpec.describe PurchaseBuyer, type: :model do
         expect(@purchase_buyer.errors.full_messages).to include("Postal code can't be blank")
       end
       it '郵便番号にハイフンがないと購入できない' do
-        @purchase_buyer.postal_code = 1_111_111
+        @purchase_buyer.postal_code = "1111111"
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include('Postal code is invalid')
       end
@@ -61,7 +61,6 @@ RSpec.describe PurchaseBuyer, type: :model do
       it '電話番号が英字複合では登録できない' do
         @purchase_buyer.phone_number = '0123456ab'
         @purchase_buyer.valid?
-        binding.pry
         expect(@purchase_buyer.errors.full_messages).to include('Phone number is not a number')
       end
       it 'userが紐づいていないと購入できない' do
