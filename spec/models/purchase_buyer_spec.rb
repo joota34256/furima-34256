@@ -13,6 +13,10 @@ RSpec.describe PurchaseBuyer, type: :model do
       it '入力が適正であれば購入できる' do
         expect(@purchase_buyer).to be_valid
       end
+      it '建物名が抜けていても登録できる' do
+        @purchase_buyer.building_number = ""
+        expect(@purchase_buyer).to be_valid
+      end
     end
     context '商品が購入できない時' do
       it '郵便番号が空だと購入できない' do
@@ -49,10 +53,16 @@ RSpec.describe PurchaseBuyer, type: :model do
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include("Phone number can't be blank")
       end
-      it '電話番号が11桁でないと購入できない' do
-        @purchase_buyer.phone_number = '0123456789'
+      it '電話番号が11桁以下でないと購入できない' do
+        @purchase_buyer.phone_number = '0123456789012'
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include('Phone number is the wrong length (should be 11 characters)')
+        expect(@purchase_buyer.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+      end
+      it '電話番号が英字複合では登録できない' do
+        @purchase_buyer.phone_number = '0123456ab'
+        @purchase_buyer.valid?
+        binding.pry
+        expect(@purchase_buyer.errors.full_messages).to include('Phone number is not a number')
       end
       it 'userが紐づいていないと購入できない' do
         @purchase_buyer.user_id = nil
